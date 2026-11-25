@@ -1,0 +1,389 @@
+@import 'tailwindcss';
+
+/* --------------------------------------------------------------------------
+   AutoClip — Neo-Brutalist Edition
+
+   Aesthetic:
+   - Light cream graph-paper grid background
+   - Thick solid black borders (2.5px - 3px)
+   - Hard, unblurred drop shadows (box-shadow: 4px 4px 0px #000)
+   - Punchy palette: Acid Lime (#C6F247), Vibrant Coral (#FF5A36), Sun Yellow (#FFE600)
+   - Chunky, tactile interactive elements with press-down active states
+   - ZERO glows, ZERO purple/blue gradients
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('./fonts/InstrumentSerif-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('./fonts/Archivo-Variable.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-sans: 'Archivo', system-ui, -apple-system, sans-serif;
+
+  /* Neo-brutalist core palette */
+  --color-neo-lime: #C6F247;
+  --color-neo-lime-dark: #b1df2e;
+  --color-neo-coral: #FF5A36;
+  --color-neo-coral-dark: #e84824;
+  --color-neo-yellow: #FFE600;
+  --color-neo-cream: #F5F2EB;
+  --color-neo-paper: #FAF7F0;
+  --color-neo-dark: #121212;
+  --color-neo-border: #000000;
+
+  /* Backward compatibility tokens mapped to neo-brutalist palette */
+  --color-ink-950: #0a0a0a;
+  --color-ink-900: #121212;
+  --color-ink-850: #222222;
+  --color-ink-800: #333333;
+  --color-ink-700: #555555;
+  --color-ink-600: #777777;
+  --color-ink-500: #888888;
+  --color-ink-400: #555555;
+  --color-ink-300: #333333;
+  --color-ink-200: #1e1e1e;
+  --color-ink-100: #121212;
+
+  --color-sodium-400: #C6F247;
+  --color-sodium-500: #C6F247;
+  --color-sodium-600: #b1df2e;
+  --color-sodium-700: #9bc822;
+
+  --color-signal-good: #10b981;
+  --color-signal-bad: #FF5A36;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-neo-cream);
+    color: var(--color-neo-dark);
+    color-scheme: light;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-neo-cream);
+    /* Neo-brutalist graph-paper grid */
+    background-image: 
+      linear-gradient(#e6e1d5 1.5px, transparent 1.5px),
+      linear-gradient(90deg, #e6e1d5 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    background-position: -1px -1px;
+    color: var(--color-neo-dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-neo-lime);
+    color: #000000;
+  }
+
+  :focus-visible {
+    outline: 3px solid #000000;
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #e8e3d8;
+    border-left: 2px solid #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #121212;
+    border: 2px solid #e8e3d8;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neo-coral);
+  }
+}
+
+@layer components {
+  .numeric {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #121212;
+  }
+
+  /* Neo-Brutalist Box Cards */
+  .neo-card {
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 5px 5px 0px #000000;
+    border-radius: 16px;
+  }
+
+  .neo-card-sm {
+    background: #ffffff;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    border-radius: 12px;
+  }
+
+  .neo-card-lime {
+    background: var(--color-neo-lime);
+    border: 2.5px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+    border-radius: 18px;
+  }
+
+  .neo-card-coral {
+    background: var(--color-neo-coral);
+    border: 2.5px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+    border-radius: 18px;
+  }
+
+  /* Neo-Brutalist Buttons */
+  .neo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    padding: 0.625rem 1.25rem;
+    border-radius: 12px;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    cursor: pointer;
+    background: #ffffff;
+    color: #000000;
+    transition: all 120ms ease;
+  }
+  .neo-btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #000000;
+  }
+  .neo-btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
+  }
+  .neo-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  .neo-btn-primary {
+    background: var(--color-neo-lime);
+    color: #000000;
+  }
+  .neo-btn-primary:hover:not(:disabled) {
+    background: var(--color-neo-lime-dark);
+  }
+
+  .neo-btn-coral {
+    background: var(--color-neo-coral);
+    color: #ffffff;
+  }
+  .neo-btn-coral:hover:not(:disabled) {
+    background: var(--color-neo-coral-dark);
+  }
+
+  .neo-btn-dark {
+    background: #121212;
+    color: #ffffff;
+  }
+  .neo-btn-dark:hover:not(:disabled) {
+    background: #000000;
+  }
+
+  /* Inputs */
+  .neo-input {
+    background: #ffffff;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    border-radius: 10px;
+    padding: 0.625rem 0.875rem;
+    color: #000000;
+    font-weight: 600;
+    width: 100%;
+    outline: none;
+    transition: all 120ms ease;
+  }
+  .neo-input:focus {
+    box-shadow: 4px 4px 0px #000000;
+    background: #fafafa;
+  }
+  .neo-input::placeholder {
+    color: #888888;
+    font-weight: 500;
+  }
+
+  /* Badges */
+  .neo-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.625rem;
+    border: 2px solid #000000;
+    border-radius: 999px;
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  /* Asterisk Burst Icon */
+  .neo-star {
+    display: inline-block;
+    font-size: 2.25rem;
+    line-height: 1;
+    font-weight: 900;
+    user-select: none;
+  }
+
+  /* Backward compatibility classes mapped to neo-brutalism */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    font-size: 0.875rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: 12px;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    cursor: pointer;
+    transition: all 120ms ease;
+  }
+  .btn:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px #000000;
+  }
+  .btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--color-neo-coral);
+    color: #ffffff;
+  }
+  .btn-ghost {
+    background: #ffffff;
+    color: #000000;
+  }
+  .btn-quiet {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: #121212;
+    padding: 0.25rem 0.5rem;
+  }
+  .btn-quiet:hover:not(:disabled) {
+    background: #e8e3d8;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .card-glass, .card, .card-subtle {
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    box-shadow: 5px 5px 0px #000000;
+    border-radius: 16px;
+  }
+
+  .field {
+    background: #ffffff;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+    border-radius: 10px;
+    padding: 0.625rem 0.875rem;
+    color: #000000;
+    font-weight: 600;
+    width: 100%;
+    outline: none;
+  }
+  .field:focus {
+    box-shadow: 4px 4px 0px #000000;
+  }
+
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 900;
+    border-radius: 8px;
+    padding: 0.2rem 0.55rem;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+  }
+  .score-badge-high {
+    background: var(--color-neo-lime);
+    color: #000000;
+  }
+  .score-badge-mid {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-neo-lime);
+    border: 2px solid #000000;
+  }
+  .status-dot-bad {
+    background: var(--color-neo-coral);
+    border: 2px solid #000000;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 1.25em;
+    height: 1.25em;
+    border: 3px solid #000000;
+    border-top-color: var(--color-neo-coral);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
